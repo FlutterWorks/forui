@@ -1,23 +1,71 @@
-
 import 'package:flutter/cupertino.dart';
+import 'package:sugar/collection.dart';
 
-abstract class FSelectGroupController<T> extends ValueNotifier<T> {
-  FSelectGroupController(T value) : super(value);
+abstract class FSelectGroupController<T> extends ChangeNotifier {
+  Set<T> _active;
 
-  void onPress(int index);
+  FSelectGroupController({required Set<T> active}) : _active = active;
 
-  bool contains(int index);
+  void select(T value);
+
+  bool state(T value);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSelectGroupController && runtimeType == other.runtimeType && _active == other._active;
+
+  @override
+  int get hashCode => _active.hashCode;
 }
 
-abstract class FCalendarController<T> extends ValueNotifier<T> {
-  /// Creates a [FCalendarController] with the given initial [value].
-  FCalendarController(super._value);
+final class FSelectGroupMultiController<T> extends FSelectGroupController<T> {
+  final int? max;
 
-  /// Called when the given [date] in a [FCalendarPickerType.day] picker is pressed.
-  ///
-  /// [date] is always in UTC timezone and truncated to the nearest date.
-  void onPress(DateTime date);
+  FSelectGroupMultiController({
+    super.active = const {},
+    this.max,
+  }) : assert(max == null || max > 0, 'limit must be null or greater than 0');
 
-  /// Returns true if the given [date] is selected.
-  bool contains(DateTime date);
+  @override
+  void select(T value) {
+    if (_active.remove(value)) {
+      notifyListeners();
+      return;
+    }
+
+    if (max != null && _active.length >= max!) {
+      return;
+    }
+
+    _active.add(value);
+    notifyListeners();
+  }
+
+  @override
+  bool state(T value) => _active.contains(value);
+
+  Set<T> get active => {..._active};
+}
+
+final class FSelectGroupRadioController<T> extends FSelectGroupController<T> {
+  FSelectGroupRadioController({super.active = const {}});
+
+  @override
+  void select(T value) {
+    if (_active.contains(value)) {
+      return;
+    }
+
+    _active
+      ..clear()
+      ..add(value);
+
+    notifyListeners();
+  }
+
+  @override
+  bool state(T value) => _active.contains(value);
+
+  T get active => _active.first;
 }
