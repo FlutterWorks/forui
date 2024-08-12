@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
 
 import 'package:meta/meta.dart';
 
@@ -58,6 +59,9 @@ final class FThemeData with Diagnosticable {
   /// The header styles.
   final FHeaderStyles headerStyle;
 
+  /// The line calendar styles.
+  final FLineCalendarStyle lineCalendarStyle;
+
   /// The progress styles.
   final FProgressStyle progressStyle;
 
@@ -95,6 +99,7 @@ final class FThemeData with Diagnosticable {
     required this.checkboxStyle,
     required this.dialogStyle,
     required this.headerStyle,
+    required this.lineCalendarStyle,
     required this.progressStyle,
     required this.resizableStyle,
     required this.tabsStyle,
@@ -127,6 +132,7 @@ final class FThemeData with Diagnosticable {
       checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -194,6 +200,7 @@ final class FThemeData with Diagnosticable {
     FCheckboxStyle? checkboxStyle,
     FDialogStyle? dialogStyle,
     FHeaderStyles? headerStyle,
+    FLineCalendarStyle? lineCalendarStyle,
     FProgressStyle? progressStyle,
     FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
@@ -217,6 +224,7 @@ final class FThemeData with Diagnosticable {
         dialogStyle: dialogStyle ?? this.dialogStyle,
         dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
+        lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
         progressStyle: progressStyle ?? this.progressStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
@@ -243,6 +251,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FLineCalendarStyle>('lineCalendarStyle', lineCalendarStyle))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
@@ -269,6 +278,7 @@ final class FThemeData with Diagnosticable {
           checkboxStyle == other.checkboxStyle &&
           dialogStyle == other.dialogStyle &&
           headerStyle == other.headerStyle &&
+          lineCalendarStyle == other.lineCalendarStyle &&
           progressStyle == other.progressStyle &&
           resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
@@ -292,6 +302,7 @@ final class FThemeData with Diagnosticable {
       checkboxStyle.hashCode ^
       dialogStyle.hashCode ^
       headerStyle.hashCode ^
+      lineCalendarStyle.hashCode ^
       progressStyle.hashCode ^
       resizableStyle.hashCode ^
       tabsStyle.hashCode ^
