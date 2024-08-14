@@ -132,7 +132,7 @@ final class FThemeData with Diagnosticable {
       checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography),
+      lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),

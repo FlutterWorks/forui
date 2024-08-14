@@ -15,6 +15,7 @@ export 'widgets/checkbox.dart';
 export 'widgets/dialog.dart';
 export 'widgets/divider.dart';
 export 'widgets/header.dart';
+export 'widgets/line_calendar.dart';
 export 'widgets/progress.dart';
 export 'widgets/resizable.dart';
 export 'widgets/scaffold.dart';
