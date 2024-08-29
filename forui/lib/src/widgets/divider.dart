@@ -16,23 +16,25 @@ final class FDivider extends StatelessWidget {
   /// The divider's style. Defaults to the appropriate style in [FThemeData.dividerStyles].
   final FDividerStyle? style;
 
-  /// True if this divider is vertical. Defaults to false (horizontal).
-  final bool vertical;
+  /// The axis. Defaults to horizontal.
+  final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style, this.vertical = false, super.key});
+  const FDivider({this.style, this.axis = Axis.horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style =
-        this.style ?? (vertical ? context.theme.dividerStyles.vertical : context.theme.dividerStyles.horizontal);
-    final (height, width) = vertical ? (null, style.thickness) : (style.thickness, null);
+    final style = this.style ??
+        switch (axis) {
+          Axis.horizontal => context.theme.dividerStyles.horizontal,
+          Axis.vertical => context.theme.dividerStyles.vertical,
+        };
 
     return Container(
       margin: style.padding,
       color: style.color,
-      height: height,
-      width: width,
+      height: axis == Axis.horizontal ? style.width : null,
+      width: axis == Axis.horizontal ? null : style.width,
     );
   }
 
@@ -40,8 +42,8 @@ final class FDivider extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('vertical', value: vertical, defaultValue: false, ifTrue: 'vertical'))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('axis', axis));
   }
 }
 
@@ -70,18 +72,6 @@ final class FDividerStyles with Diagnosticable {
         );
 
   /// Returns a copy of this [FDividerStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FDividerStyles(
-  ///   horizontal: ...,
-  ///   vertical: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(vertical: ...);
-  ///
-  /// print(style.horizontal == copy.horizontal); // true
-  /// print(style.vertical == copy.vertical); // false
-  /// ```
   @useResult
   FDividerStyles copyWith({FDividerStyle? horizontal, FDividerStyle? vertical}) => FDividerStyles(
         horizontal: horizontal ?? this.horizontal,
@@ -122,44 +112,31 @@ final class FDividerStyle with Diagnosticable {
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   final EdgeInsetsGeometry padding;
 
-  /// The thickness of the separating line. Defaults to 1.
+  /// The width (thickness) of the separating line. Defaults to 1.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * `thickness` <= 0.0
-  /// * `thickness` is Nan
-  final double thickness;
+  /// * `width` <= 0.0
+  /// * `width` is Nan
+  final double width;
 
   /// Creates a [FDividerStyle].
-  FDividerStyle({required this.color, required this.padding, this.thickness = 1})
-      : assert(0 < thickness, 'The thickness is $thickness, but it should be in the range "0 < thickness".');
+  FDividerStyle({required this.color, required this.padding, this.width = 1})
+      : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
 
   /// Creates a [FDividerStyle] that inherits its properties from [colorScheme], [style], and [padding].
   FDividerStyle.inherit({
     required FColorScheme colorScheme,
     required FStyle style,
     required EdgeInsetsGeometry padding,
-  }) : this(color: colorScheme.secondary, padding: padding, thickness: style.borderWidth);
+  }) : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
   /// Returns a copy of this [FDividerStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FDividerStyle(
-  ///   color: Colors.black,
-  ///   width: 1,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(width: 2);
-  ///
-  /// print(copy.color); // black
-  /// print(copy.width); // 2
-  /// ```
   @useResult
-  FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? thickness}) => FDividerStyle(
+  FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FDividerStyle(
         color: color ?? this.color,
         padding: padding ?? this.padding,
-        thickness: thickness ?? this.thickness,
+        width: width ?? this.width,
       );
 
   @override
@@ -168,7 +145,7 @@ final class FDividerStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('padding', padding))
       ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('thickness', thickness));
+      ..add(DoubleProperty('width', width));
   }
 
   @override
@@ -178,8 +155,8 @@ final class FDividerStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           color == other.color &&
           padding == other.padding &&
-          thickness == other.thickness;
+          width == other.width;
 
   @override
-  int get hashCode => color.hashCode ^ padding.hashCode ^ thickness.hashCode;
+  int get hashCode => color.hashCode ^ padding.hashCode ^ width.hashCode;
 }

@@ -61,6 +61,9 @@ final class FThemeData with Diagnosticable {
   /// The line calendar styles.
   final FLineCalendarStyle lineCalendarStyle;
 
+  /// The label styles.
+  final FLabelStyles labelStyles;
+
   /// The progress styles.
   final FProgressStyle progressStyle;
 
@@ -99,6 +102,7 @@ final class FThemeData with Diagnosticable {
     required this.dialogStyle,
     required this.headerStyle,
     required this.lineCalendarStyle,
+    required this.labelStyles,
     required this.progressStyle,
     required this.resizableStyle,
     required this.tabsStyle,
@@ -128,10 +132,11 @@ final class FThemeData with Diagnosticable {
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme),
+      checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      labelStyles: FLabelStyles.inherit(style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -200,6 +205,7 @@ final class FThemeData with Diagnosticable {
     FDialogStyle? dialogStyle,
     FHeaderStyles? headerStyle,
     FLineCalendarStyle? lineCalendarStyle,
+    FLabelStyles? labelStyles,
     FProgressStyle? progressStyle,
     FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
@@ -224,6 +230,7 @@ final class FThemeData with Diagnosticable {
         dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
         lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
+        labelStyles: labelStyles ?? this.labelStyles,
         progressStyle: progressStyle ?? this.progressStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
@@ -251,6 +258,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FLineCalendarStyle>('lineCalendarStyle', lineCalendarStyle))
+      ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
@@ -276,14 +284,15 @@ final class FThemeData with Diagnosticable {
           cardStyle == other.cardStyle &&
           checkboxStyle == other.checkboxStyle &&
           dialogStyle == other.dialogStyle &&
+          dividerStyles == other.dividerStyles &&
           headerStyle == other.headerStyle &&
           lineCalendarStyle == other.lineCalendarStyle &&
+          labelStyles == other.labelStyles &&
           progressStyle == other.progressStyle &&
           resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
           scaffoldStyle == other.scaffoldStyle &&
-          dividerStyles == other.dividerStyles &&
           switchStyle == other.switchStyle;
 
   @override
@@ -300,13 +309,14 @@ final class FThemeData with Diagnosticable {
       cardStyle.hashCode ^
       checkboxStyle.hashCode ^
       dialogStyle.hashCode ^
+      dividerStyles.hashCode ^
       headerStyle.hashCode ^
       lineCalendarStyle.hashCode ^
+      labelStyles.hashCode ^
       progressStyle.hashCode ^
       resizableStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
       scaffoldStyle.hashCode ^
-      dividerStyles.hashCode ^
       switchStyle.hashCode;
 }

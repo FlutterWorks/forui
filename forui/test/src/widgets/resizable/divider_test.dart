@@ -12,7 +12,7 @@ import 'divider_test.mocks.dart';
 void main() {
   final style = FResizableDividerStyle(
     color: const Color(0xFF000000),
-    thickness: 2,
+    width: 2,
     thumbStyle: FResizableDividerThumbStyle(
       backgroundColor: const Color(0xFF000000),
       foregroundColor: const Color(0xFF000000),
@@ -36,19 +36,25 @@ void main() {
           controller: controller,
           style: style,
           type: FResizableDivider.divider,
-          indexes: (left: -1, right: 0),
+          left: -1,
+          right: 0,
           crossAxisExtent: null,
           hitRegionExtent: 100,
           cursor: MouseCursor.defer,
+          resizePercentage: 0.1,
+          semanticFormatterCallback: (l, r) => '',
         ),
     () => HorizontalDivider(
           controller: controller,
           style: style,
           type: FResizableDivider.divider,
-          indexes: (left: 0, right: 0),
+          left: 0,
+          right: 0,
           crossAxisExtent: null,
           hitRegionExtent: 100,
           cursor: MouseCursor.defer,
+          resizePercentage: 0.1,
+          semanticFormatterCallback: (l, r) => '',
         ),
   ].indexed) {
     test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));

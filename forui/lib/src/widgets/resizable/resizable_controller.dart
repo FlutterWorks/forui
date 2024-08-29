@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].
@@ -31,6 +30,8 @@ abstract interface class FResizableController extends ChangeNotifier {
 
   bool _haptic = false;
 
+  FResizableController._();
+
   /// Creates a [FResizableController].
   ///
   /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
@@ -44,7 +45,7 @@ abstract interface class FResizableController extends ChangeNotifier {
     void Function(List<FResizableRegionData> resized)? onResizeEnd,
   }) = _ResizableController;
 
-  /// Creates a [FResizableController] that cascades shrinking of a region below their minimum sizes to its neighbours.
+  /// Creates a [FResizableController] that cascades shrinking of a region below their minimum extents to its neighbours.
   ///
   /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
   /// prefer [onResizeEnd], which is called only after the regions have bee resized.
@@ -56,8 +57,6 @@ abstract interface class FResizableController extends ChangeNotifier {
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,
   }) = _CascadeController;
-
-  FResizableController._();
 
   /// Updates the regions at the given indexes in addition to their neighbours. Returns true if haptic feedback should
   /// be performed.
@@ -72,10 +71,7 @@ final class _ResizableController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(List<FResizableRegionData> resized)? onResizeEnd;
 
-  _ResizableController({
-    this.onResizeUpdate,
-    this.onResizeEnd,
-  }) : super._();
+  _ResizableController({this.onResizeUpdate, this.onResizeEnd}) : super._();
 
   @override
   bool update(int left, int right, double delta) {

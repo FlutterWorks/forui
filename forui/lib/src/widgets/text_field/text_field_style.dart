@@ -1,4 +1,9 @@
-part of 'text_field.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable {
@@ -28,10 +33,10 @@ final class FTextFieldStyle with Diagnosticable {
   final EdgeInsets scrollPadding;
 
   /// The style when this text field is enabled.
-  final FTextFieldNormalStyle enabledStyle;
+  final FTextFieldStateStyle enabledStyle;
 
   /// The style when this text field is enabled.
-  final FTextFieldNormalStyle disabledStyle;
+  final FTextFieldStateStyle disabledStyle;
 
   /// The style when this text field has an error.
   final FTextFieldErrorStyle errorStyle;
@@ -56,21 +61,21 @@ final class FTextFieldStyle with Diagnosticable {
         cursorColor = CupertinoColors.activeBlue,
         contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         scrollPadding = const EdgeInsets.all(20.0),
-        enabledStyle = FTextFieldNormalStyle.inherit(
+        enabledStyle = FTextFieldStateStyle.inherit(
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,
           focusedBorderColor: colorScheme.primary,
           unfocusedBorderColor: colorScheme.border,
-          formFieldNormaStyle: style.formFieldStyle.enabledStyle,
+          formFieldStyle: style.enabledFormFieldStyle,
           typography: typography,
           style: style,
         ),
-        disabledStyle = FTextFieldNormalStyle.inherit(
+        disabledStyle = FTextFieldStateStyle.inherit(
           contentColor: colorScheme.primary.withOpacity(0.7),
           hintColor: colorScheme.border.withOpacity(0.7),
           focusedBorderColor: colorScheme.border.withOpacity(0.7),
           unfocusedBorderColor: colorScheme.border.withOpacity(0.7),
-          formFieldNormaStyle: style.formFieldStyle.disabledStyle,
+          formFieldStyle: style.disabledFormFieldStyle,
           typography: typography,
           style: style,
         ),
@@ -79,35 +84,20 @@ final class FTextFieldStyle with Diagnosticable {
           hintColor: colorScheme.mutedForeground,
           focusedBorderColor: colorScheme.error,
           unfocusedBorderColor: colorScheme.error,
-          formFieldErrorStyle: style.formFieldStyle.errorStyle,
+          formFieldErrorStyle: style.errorFormFieldStyle,
           typography: typography,
           style: style,
         );
 
   /// Returns a copy of this [FTextFieldStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FTextFieldStyle(
-  ///   enabledStyle: ...,
-  ///   disabledStyle: ...,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   disabledStyle: ...,
-  /// );
-  ///
-  /// print(style.enabledStyle == copy.enabledStyle); // true
-  /// print(style.disabledStyle == copy.disabledStyle); // false
-  /// ```
   @useResult
   FTextFieldStyle copyWith({
     Brightness? keyboardAppearance,
     Color? cursorColor,
     EdgeInsets? contentPadding,
     EdgeInsets? scrollPadding,
-    FTextFieldNormalStyle? enabledStyle,
-    FTextFieldNormalStyle? disabledStyle,
+    FTextFieldStateStyle? enabledStyle,
+    FTextFieldStateStyle? disabledStyle,
     FTextFieldErrorStyle? errorStyle,
   }) =>
       FTextFieldStyle(
