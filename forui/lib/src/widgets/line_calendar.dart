@@ -315,7 +315,8 @@ final class FLineCalendarStyle with Diagnosticable {
         heightPadding: heightPadding ?? this.heightPadding,
         itemPadding: itemPadding ?? this.itemPadding,
         selectedCurrentDateIndicatorColor: selectedCurrentDateIndicatorColor ?? this.selectedCurrentDateIndicatorColor,
-        unselectedCurrentDateIndicatorColor: unselectedCurrentDateIndicatorColor ?? this.unselectedCurrentDateIndicatorColor,
+        unselectedCurrentDateIndicatorColor:
+            unselectedCurrentDateIndicatorColor ?? this.unselectedCurrentDateIndicatorColor,
         selectedDecoration: selectedDecoration ?? this.selectedDecoration,
         unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
         selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
