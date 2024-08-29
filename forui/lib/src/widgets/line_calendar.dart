@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
-import 'package:meta/meta.dart';
-
-import 'package:sugar/sugar.dart';
 
 const _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 final _epoch = LocalDate(2000);
@@ -313,8 +314,8 @@ final class FLineCalendarStyle with Diagnosticable {
       FLineCalendarStyle(
         heightPadding: heightPadding ?? this.heightPadding,
         itemPadding: itemPadding ?? this.itemPadding,
-        selectedIndicatorColor: primary ?? this.selectedIndicatorColor,
-        unselectedIndicatorColor: primaryForeground ?? this.unselectedIndicatorColor,
+        selectedIndicatorColor: primary ?? selectedIndicatorColor,
+        unselectedIndicatorColor: primaryForeground ?? unselectedIndicatorColor,
         selectedDecoration: selectedDecoration ?? this.selectedDecoration,
         unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
         selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
