@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
-import 'package:sugar/sugar.dart';
 
 class Example extends StatefulWidget {
   const Example({super.key});
@@ -12,20 +11,15 @@ class Example extends StatefulWidget {
 }
 
 class _ExampleState extends State<Example> {
-  late final ValueNotifier<LocalDate> _date;
-
   @override
   void initState() {
     super.initState();
-    _date = ValueNotifier(LocalDate.now());
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) => const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FLineCalendar(selected: _date),
-        ],
+        children: [Placeholder()],
       );
 }
 
