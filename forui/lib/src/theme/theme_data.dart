@@ -80,6 +80,9 @@ final class FThemeData with Diagnosticable {
   /// The text field style.
   final FTextFieldStyle textFieldStyle;
 
+  /// The tooltip style.
+  final FTooltipStyle tooltipStyle;
+
   /// The scaffold style.
   final FScaffoldStyle scaffoldStyle;
 
@@ -112,6 +115,7 @@ final class FThemeData with Diagnosticable {
     required this.resizableStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
+    required this.tooltipStyle,
     required this.scaffoldStyle,
     required this.dividerStyles,
     required this.switchStyle,
@@ -147,6 +151,7 @@ final class FThemeData with Diagnosticable {
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme),
@@ -217,6 +222,7 @@ final class FThemeData with Diagnosticable {
     FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
+    FTooltipStyle? tooltipStyle,
     FScaffoldStyle? scaffoldStyle,
     FDividerStyles? dividerStyles,
     FSwitchStyle? switchStyle,
@@ -243,6 +249,7 @@ final class FThemeData with Diagnosticable {
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
+        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
         switchStyle: switchStyle ?? this.switchStyle,
       );
@@ -272,6 +279,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
@@ -302,6 +310,7 @@ final class FThemeData with Diagnosticable {
           resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
+          tooltipStyle == other.tooltipStyle &&
           scaffoldStyle == other.scaffoldStyle &&
           switchStyle == other.switchStyle;
 
@@ -328,6 +337,7 @@ final class FThemeData with Diagnosticable {
       resizableStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
+      tooltipStyle.hashCode ^
       scaffoldStyle.hashCode ^
       switchStyle.hashCode;
 }
