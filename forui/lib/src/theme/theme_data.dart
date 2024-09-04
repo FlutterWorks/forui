@@ -154,7 +154,7 @@ final class FThemeData with Diagnosticable {
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
-      switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme),
+      switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
     );
   }
 
