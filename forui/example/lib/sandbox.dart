@@ -10,6 +10,9 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> {
+  bool value = false;
+  FSelectGroupController selectGroupController = FRadioSelectGroupController(value: 1);
+
   @override
   void initState() {
     super.initState();
@@ -19,29 +22,13 @@ class _SandboxState extends State<Sandbox> {
   Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const FSwitch(
-            label: Text('Airplane Mode'),
-            description: Text('Disable all wireless connections.'),
-            semanticLabel: 'Airplane Mode',
+          FTextField.email(
+            autovalidateMode: AutovalidateMode.always,
+            description: const Text('Description'),
+            validator: (value) => value?.length == 5 ? 'Error message' : null,
           ),
-          FTooltip(
-            longPressExitDuration: const Duration(seconds: 5000),
-            tipBuilder: (context, style, _) => const Text('Add to library'),
-            child: FButton(
-              style: FButtonStyle.outline,
-              onPress: () {},
-              label: const Text('Hover'),
-            ),
-          ),
-          Tooltip(
-            message: 'Add to library 2',
-            showDuration: const Duration(seconds: 5000),
-            child: FButton(
-              style: FButtonStyle.outline,
-              onPress: () {},
-              label: const Text('Hover 2'),
-            ),
-          )
+          const SizedBox(height: 20),
+          const FTextField.password(),
         ],
       );
 }

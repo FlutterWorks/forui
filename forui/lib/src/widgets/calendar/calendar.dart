@@ -21,7 +21,7 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 /// See:
 /// * https://forui.dev/docs/calendar for working examples.
 /// * [FCalendarController] for customizing a calendar's date selection behavior.
-/// * [FCalendarDayStyle] for customizing a calendar's appearance.
+/// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
@@ -124,11 +124,8 @@ class FCalendar extends StatelessWidget {
                       start: start.toLocalDate(),
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
-                      initial: _month.value,
-                      onChange: (date) {
-                        _month.value = date;
-                        _type.value = FCalendarPickerType.day;
-                      },
+                      month: _month,
+                      type: _type,
                     ),
                 },
               ),

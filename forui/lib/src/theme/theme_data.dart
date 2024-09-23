@@ -71,6 +71,9 @@ final class FThemeData with Diagnosticable {
   /// The progress styles.
   final FProgressStyle progressStyle;
 
+  /// The radio style.
+  final FRadioStyle radioStyle;
+
   /// The resizable style.
   final FResizableStyle resizableStyle;
 
@@ -85,6 +88,12 @@ final class FThemeData with Diagnosticable {
 
   /// The scaffold style.
   final FScaffoldStyle scaffoldStyle;
+
+  /// The select group style.
+  final FSelectGroupStyle selectGroupStyle;
+
+  /// The slider styles.
+  final FSliderStyles sliderStyles;
 
   /// The switch style.
   final FSwitchStyle switchStyle;
@@ -107,17 +116,20 @@ final class FThemeData with Diagnosticable {
     required this.cardStyle,
     required this.checkboxStyle,
     required this.dialogStyle,
+    required this.dividerStyles,
     required this.headerStyle,
     required this.lineCalendarStyle,
     required this.labelStyles,
     required this.popoverStyle,
     required this.progressStyle,
+    required this.radioStyle,
     required this.resizableStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
     required this.tooltipStyle,
     required this.scaffoldStyle,
-    required this.dividerStyles,
+    required this.selectGroupStyle,
+    required this.sliderStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
   });
@@ -143,17 +155,20 @@ final class FThemeData with Diagnosticable {
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
+      radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
-      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
+      selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
     );
   }
@@ -214,17 +229,20 @@ final class FThemeData with Diagnosticable {
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
     FDialogStyle? dialogStyle,
+    FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyle,
     FLineCalendarStyle? lineCalendarStyle,
     FLabelStyles? labelStyles,
     FPopoverStyle? popoverStyle,
     FProgressStyle? progressStyle,
+    FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
     FTooltipStyle? tooltipStyle,
     FScaffoldStyle? scaffoldStyle,
-    FDividerStyles? dividerStyles,
+    FSelectGroupStyle? selectGroupStyle,
+    FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
   }) =>
       FThemeData(
@@ -246,11 +264,14 @@ final class FThemeData with Diagnosticable {
         labelStyles: labelStyles ?? this.labelStyles,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         progressStyle: progressStyle ?? this.progressStyle,
+        radioStyle: radioStyle ?? this.radioStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         tooltipStyle: tooltipStyle ?? this.tooltipStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
+        selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
+        sliderStyles: sliderStyles ?? this.sliderStyles,
         switchStyle: switchStyle ?? this.switchStyle,
       );
 
@@ -262,7 +283,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('avatarStyle', avatarStyle))
+      ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
@@ -275,12 +296,15 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FLineCalendarStyle>('lineCalendarStyle', lineCalendarStyle))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('progressStyle', progressStyle))
-      ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
+      ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
 
@@ -307,11 +331,14 @@ final class FThemeData with Diagnosticable {
           labelStyles == other.labelStyles &&
           popoverStyle == other.popoverStyle &&
           progressStyle == other.progressStyle &&
+          radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
           tooltipStyle == other.tooltipStyle &&
           scaffoldStyle == other.scaffoldStyle &&
+          selectGroupStyle == other.selectGroupStyle &&
+          sliderStyles == other.sliderStyles &&
           switchStyle == other.switchStyle;
 
   @override
@@ -334,10 +361,13 @@ final class FThemeData with Diagnosticable {
       labelStyles.hashCode ^
       popoverStyle.hashCode ^
       progressStyle.hashCode ^
+      radioStyle.hashCode ^
       resizableStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
       tooltipStyle.hashCode ^
       scaffoldStyle.hashCode ^
+      selectGroupStyle.hashCode ^
+      sliderStyles.hashCode ^
       switchStyle.hashCode;
 }
